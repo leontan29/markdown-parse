@@ -5,6 +5,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class MarkdownParse {
+    public static boolean isEscaped(int currentIndex, String markdown){
+        return currentIndex != 0 && markdown.charAt(currentIndex - 1) == '\\';
+    }
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
         // find the next [, then find the ], then find the (, then take up to
@@ -13,6 +16,12 @@ public class MarkdownParse {
         while(currentIndex < markdown.length()) {
             int nextOpenBracket = markdown.indexOf("[", currentIndex);
             int nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
+            while (isEscaped(nextCloseBracket, markdown)){
+                nextCloseBracket = markdown.indexOf("]", nextOpenBracket);
+                if (nextCloseBracket == -1) {
+                    break;
+                }
+            }
             int openParen = markdown.indexOf("(", nextCloseBracket);
             int closeParen = markdown.indexOf(")", openParen);
             toReturn.add(markdown.substring(openParen + 1, closeParen));
