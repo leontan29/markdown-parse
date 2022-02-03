@@ -1,1 +1,2 @@
-a link 1 text after link with no links after it
+[a link 1](https://google.com)
+text after link with no links after it

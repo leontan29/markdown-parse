@@ -9,10 +9,17 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.*;
 
+
+
 public class MarkdownParseTest {
 
     // javac -cp ".;lib\junit-4.12.jar;lib\hamcrest-core-1.3.jar" MarkdownParseTest.java
     // java -cp ".;lib/junit-4.12.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore MarkdownParseTest
+    
+    @Test 
+    public void newTest() {
+        assertTrue(true);
+    }
     @Test 
     public void addition() {
         // Passes if 2 equals 1 + 1, fails if they are not equal
@@ -67,4 +74,3 @@ public class MarkdownParseTest {
         assertEquals(correctOutput,links);
     }
 }
-
