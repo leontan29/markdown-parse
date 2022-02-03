@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class MarkdownParse {
-
     public static ArrayList<String> getLinks(String markdown) {
         ArrayList<String> toReturn = new ArrayList<>();
         
@@ -15,7 +14,7 @@ public class MarkdownParse {
         boolean findLink = false;
         int start = 0;
         int end = 0;
-        while (currentIndex < markdown.length()) {
+        while(currentIndex < markdown.length()) {
             char curr = markdown.charAt(currentIndex);
             //if an escape char is found, skip it and the 
             //character it is escaping
@@ -60,15 +59,12 @@ public class MarkdownParse {
         }
 
         return toReturn;
+
     }
     public static void main(String[] args) throws IOException {
-        // take in the first command line arg as the file name to be searched for links.
 		Path fileName = Path.of(args[0]);
-        // read the file contents into a string
 	    String contents = Files.readString(fileName);
-        // run getLinks on the contents of the file
         ArrayList<String> links = getLinks(contents);
-        // print out the links that we found
         System.out.println(links);
     }
 }

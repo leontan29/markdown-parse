@@ -9,8 +9,6 @@ import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.*;
 
-
-
 public class MarkdownParseTest {
 
     // javac -cp ".;lib\junit-4.12.jar;lib\hamcrest-core-1.3.jar" MarkdownParseTest.java
@@ -69,4 +67,4 @@ public class MarkdownParseTest {
         assertEquals(correctOutput,links);
     }
 }
-}
+
