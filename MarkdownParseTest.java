@@ -1,38 +1,76 @@
+// importing junit libraries
 import static org.junit.Assert.*;
 import org.junit.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
-import java.util.List;
+import java.util.*;
+
+
 
 public class MarkdownParseTest {
-    @Test
-    public void testFile1() throws IOException {
-        String contents= Files.readString(Path.of("./test-file.md"));
-        List<String> expect = List.of("https://something.com", "some-page.html");
-        assertEquals(MarkdownParse.getLinks(contents), expect);
-    }
+
+    // javac -cp ".;lib\junit-4.12.jar;lib\hamcrest-core-1.3.jar" MarkdownParseTest.java
+    // java -cp ".;lib/junit-4.12.jar;lib/hamcrest-core-1.3.jar" org.junit.runner.JUnitCore MarkdownParseTest
     
-    @Test
-    public void testFile2() throws IOException {
-        String contents= Files.readString(Path.of("./test-file2.md"));
-        List<String> expect = List.of("https://something.com", "some-page.html");
-        assertEquals(MarkdownParse.getLinks(contents), expect);
+    @Test 
+    public void newTest() {
+        assertTrue(true);
+    }
+    @Test 
+    public void addition() {
+        // Passes if 2 equals 1 + 1, fails if they are not equal
+        assertEquals(2, 1 + 1);
     }
 
     @Test
-    public void testMissingCloseParen() {
-        String contents= "[link title](a.com";
-        List<String> expect = List.of();
-        assertEquals(MarkdownParse.getLinks(contents), expect);
+    public void TestOne() throws IOException, NoSuchFileException {
+        //passes if running Markdown parse returns the correct text for "test-file.md"
+        List<String> correctOutput = List.of("https://something.com","some-page.html");
+        Path fileName = Path.of("Group-test-file.md");
+        // read the file contents into a string
+	    String contents = Files.readString(fileName);
+        // run getLinks on the contents of the file
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        assertEquals(correctOutput,links);
     }
 
     @Test
-    public void testSpaceAroundLink() {
-        String contents= "[link title](   a.com   )";
-        List<String> expect = List.of("a.com");
-        assertEquals(expect, MarkdownParse.getLinks(contents));
+    public void TestTwo() throws IOException, NoSuchFileException {
+        //passes if running Markdown parse returns the correct text for "test-file2.md"
+        List<String> correctOutput = List.of("https://google.com");
+        Path fileName = Path.of("Group-test-file2.md");
+        // read the file contents into a string
+	    String contents = Files.readString(fileName);
+        // run getLinks on the contents of the file
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        assertEquals(correctOutput,links);
     }
 
+    @Test
+    public void TestThree() throws IOException, NoSuchFileException {
+        //passes if running Markdown parse returns the correct text for "test-file3.md"
+        List<String> correctOutput = List.of("this is a link");
+        Path fileName = Path.of("Group-test-file3.md");
+        // read the file contents into a string
+	    String contents = Files.readString(fileName);
+        // run getLinks on the contents of the file
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        assertEquals(correctOutput,links);
+    }
+
+    @Test
+    public void TestFour() throws IOException, NoSuchFileException {
+        //passes if running Markdown parse returns the correct text for "test-file4.md"
+        List<String> correctOutput = List.of("https://something.com", "");
+        Path fileName = Path.of("Group-test-file4.md");
+        // read the file contents into a string
+	    String contents = Files.readString(fileName);
+        // run getLinks on the contents of the file
+        ArrayList<String> links = MarkdownParse.getLinks(contents);
+        assertEquals(correctOutput,links);
+    }
 }
